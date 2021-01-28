@@ -52,7 +52,8 @@
     </Style>
   </Window.Styles>
 
-  <TabControl Items="{Binding TabVMs}">
+  <!--选项卡面板-->
+  <TabControl Items="{Binding TabVMs}" TabStripPlacement="Left" >
     <TabControl.ItemTemplate>
       <DataTemplate>
         <TextBlock Text="{Binding Name}"/>
@@ -64,5 +65,5 @@
       </DataTemplate>
     </TabControl.ContentTemplate>
   </TabControl>
-  
+
 </Window>

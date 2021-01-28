@@ -6,8 +6,12 @@
   <ItemGroup>
     <Folder Include="_M\" />
     <AvaloniaResource Include="Assets\**" />
-    <Folder Include="_VM\Tab\" />
-    <Folder Include="_V\Tab\" />
+    <Folder Include="_VM\Tab\Spin\" />
+    <Folder Include="_VM\Tab\TrueTime\" />
+    <Folder Include="_VM\Tab\Uppaal\" />
+    <Folder Include="_V\Tab\Spin\" />
+    <Folder Include="_V\Tab\TrueTime\" />
+    <Folder Include="_V\Tab\Uppaal\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />
