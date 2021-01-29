@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="_M\" />
     <AvaloniaResource Include="Assets\**" />
     <Folder Include="_VM\Tab\Spin\" />
     <Folder Include="_VM\Tab\TrueTime\" />
