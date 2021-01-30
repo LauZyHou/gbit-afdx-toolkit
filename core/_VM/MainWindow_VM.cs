@@ -18,6 +18,8 @@ namespace core._VM
             List<CommonItem_VM> commonItem_VMs = new List<CommonItem_VM>();
             commonItem_VMs.Add(new TextItem_VM("测试1", "1"));
             commonItem_VMs.Add(new TextItem_VM("测试2", "2"));
+            commonItem_VMs.Add(new CheckItem_VM("测试3", true));
+            commonItem_VMs.Add(new CheckItem_VM("测试4", false));
             CommonTab_VM commonTab_VM = new CommonTab_VM("测试", commonItem_VMs);
             tabVMs.Add(commonTab_VM);
         }
