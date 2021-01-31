@@ -5,12 +5,6 @@
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-    <Folder Include="_VM\Tab\Spin\" />
-    <Folder Include="_VM\Tab\TrueTime\" />
-    <Folder Include="_VM\Tab\Uppaal\" />
-    <Folder Include="_V\Tab\Spin\" />
-    <Folder Include="_V\Tab\TrueTime\" />
-    <Folder Include="_V\Tab\Uppaal\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />

@@ -4,5 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="core._V.UppaalTab_V">
-  Welcome to Avalonia! uppaal
+  <TabControl Items="{Binding CommonTab_VMs}" TabStripPlacement="Top" >
+    <TabControl.ItemTemplate>
+      <DataTemplate>
+        <TextBlock Text="{Binding Name}"/>
+      </DataTemplate>
+    </TabControl.ItemTemplate>
+    <TabControl.ContentTemplate>
+      <DataTemplate>
+        <ContentControl Content="{Binding .}"/>
+      </DataTemplate>
+    </TabControl.ContentTemplate>
+  </TabControl>
 </UserControl>

@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="core._V.CommonTab_V">
-  <ItemsControl Items="{Binding CommonItem_VMs}" Padding="30">
-    <ItemsControl.ItemTemplate>
-      <DataTemplate>
-        <ContentControl Content="{Binding .}" Height="30"/>
-      </DataTemplate>
-    </ItemsControl.ItemTemplate>
-  </ItemsControl>
+  <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+    <ItemsControl Items="{Binding CommonItem_VMs}" Padding="30, 10">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate>
+          <ContentControl Content="{Binding .}" Height="30"/>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+  </ScrollViewer>
 </UserControl>
