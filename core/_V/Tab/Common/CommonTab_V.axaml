@@ -4,13 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="core._V.CommonTab_V">
-  <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-    <ItemsControl Items="{Binding CommonItem_VMs}" Padding="30, 10">
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-          <ContentControl Content="{Binding .}" Height="30"/>
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-    </ItemsControl>
-  </ScrollViewer>
+  <Grid RowDefinitions="*, 10, 30" Margin="30, 10">
+    <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+      <ItemsControl Items="{Binding CommonItem_VMs}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <ContentControl Content="{Binding .}" Height="30"/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+    <Button Grid.Row="2" HorizontalContentAlignment="Center" Background="White">生成模型</Button>
+  </Grid>
 </UserControl>

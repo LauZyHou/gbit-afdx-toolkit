@@ -234,7 +234,7 @@ _Pvt_Extensions
 *.ttf
 *.TTF
 *.svg
-*.png
+# *.png
 *.ico
 *.jpg
 *.jpeg

@@ -53,17 +53,29 @@
   </Window.Styles>
 
   <!--选项卡面板-->
-  <TabControl Items="{Binding TabVMs}" TabStripPlacement="Left" >
-    <TabControl.ItemTemplate>
-      <DataTemplate>
-        <TextBlock Text="{Binding Name}"/>
-      </DataTemplate>
-    </TabControl.ItemTemplate>
-    <TabControl.ContentTemplate>
-      <DataTemplate>
-        <ContentControl Content="{Binding .}"/>
-      </DataTemplate>
-    </TabControl.ContentTemplate>
-  </TabControl>
+  <Grid RowDefinitions="*, 30" Background="#2B579A">
+    <TabControl Grid.Row="0" Items="{Binding TabVMs}" TabStripPlacement="Left" >
+      <TabControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Text="{Binding Name}"/>
+        </DataTemplate>
+      </TabControl.ItemTemplate>
+      <TabControl.ContentTemplate>
+        <DataTemplate>
+          <ContentControl Content="{Binding .}"/>
+        </DataTemplate>
+      </TabControl.ContentTemplate>
+    </TabControl>
+    <Grid Grid.Row="1" ColumnDefinitions="30, *, 35, 35">
+      <TextBlock Grid.Column="0" Text=" # " FontSize="24" Foreground="White" VerticalAlignment="Center"/>
+      <TextBlock Grid.Column="1" Text="在此处获取用户提示" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+      <Button Grid.Column="2">
+        <Image Source="avares://core/Assets/open.png" Width="30" Height="30"/>
+      </Button>
+      <Button Grid.Column="3">
+        <Image Source="avares://core/Assets/save.png" Width="30" Height="30"/>
+      </Button>
+    </Grid>
+  </Grid>
 
 </Window>
