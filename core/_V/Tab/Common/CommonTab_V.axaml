@@ -14,6 +14,6 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
     </ScrollViewer>
-    <Button Grid.Row="2" HorizontalContentAlignment="Center" Background="White">生成模型</Button>
+    <Button Grid.Row="2" HorizontalContentAlignment="Center" Background="White" Command="{Binding GenModel}">生成模型</Button>
   </Grid>
 </UserControl>

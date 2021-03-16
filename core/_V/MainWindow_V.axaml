@@ -68,7 +68,7 @@
     </TabControl>
     <Grid Grid.Row="1" ColumnDefinitions="30, *, 35, 35">
       <TextBlock Grid.Column="0" Text=" # " FontSize="24" Foreground="White" VerticalAlignment="Center"/>
-      <TextBlock Grid.Column="1" Text="在此处获取用户提示" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
+      <TextBlock Grid.Column="1" Text="{Binding Tip, Mode=OneWay}" FontSize="18" Foreground="White" VerticalAlignment="Center"/>
       <Button Grid.Column="2">
         <Image Source="avares://core/Assets/open.png" Width="30" Height="30"/>
       </Button>
