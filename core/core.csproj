@@ -16,4 +16,12 @@
       <DependentUpon>MainWindow_V.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Products\SPIN\" />
+    <Folder Include="Products\TrueTime\" />
+    <Folder Include="Products\UPPAAL\" />
+    <Folder Include="Templates\TrueTime\" />
+    <Folder Include="Templates\UPPAAL\" />
+    <Folder Include="Templates\SPIN\" />
+  </ItemGroup>
 </Project>

@@ -238,3 +238,9 @@ _Pvt_Extensions
 *.ico
 *.jpg
 *.jpeg
+
+**/Templates/*
+**/Products/*
+!core/Templates/.gitkeep
+!core/Products/.gitkeep
+
