@@ -16,14 +16,15 @@ namespace core
         /// <param name="destDir">目标目录</param>
         /// <param name="rules">替换规则</param>
         /// <param name="filter">文件匹配规则</param>
-        public static void ReplaceOnCopyDir(string sourceDir, string destDir, LinkedList<Tuple<string, string>> rules, string filter = "*")
+        /// <returns>是否成功</returns>
+        public static bool ReplaceOnCopyDir(string sourceDir, string destDir, LinkedList<Tuple<string, string>> rules, string filter = "*")
         {
             // 获取源目录，模板不存在时提示
             DirectoryInfo sourceInfo = new DirectoryInfo(sourceDir);
             if (!sourceInfo.Exists)
             {
                 FlushTip("模板" + sourceInfo.FullName + "不存在！");
-                return;
+                return false;
             }
             // 如果目标目录已经存在，就把它删除
             DirectoryInfo destInfo = new DirectoryInfo(destDir);
@@ -40,6 +41,7 @@ namespace core
             {
                 ReplaceFileContent(fpath, rules);
             }
+            return true;
         }
 
         /// <summary>
@@ -107,6 +109,25 @@ namespace core
             }
             source = Path.Combine(templatePath, specType);
             dest = Path.Combine(productPath, specType);
+        }
+
+        /// <summary>
+        /// 生成指定工具框架的具体模型
+        /// 先获取到模板目录和生成目录，然后将模板复制过去，然后做规则替换
+        /// </summary>
+        /// <param name="modelType">工具框架</param>
+        /// <param name="specName">具体模型</param>
+        /// <param name="rules">替换规则</param>
+        public static void GenerateModel(ModelType modelType, string specName, LinkedList<Tuple<string, string>> rules)
+        {
+            // 获取模型模板目录和模型的生成模板
+            string sourcePath, destPath;
+            GetSoruceAndDest(modelType, specName, out sourcePath, out destPath);
+            // 使用替换规则，将源目录的模型模板拷贝到生成目录并替换
+            bool res = ReplaceOnCopyDir(sourcePath, destPath, rules);
+            if (!res) return;
+            // 刷新用户提示
+            FlushTip($"成功生成{modelType}的{specName}模型");
         }
 
         #region 私有

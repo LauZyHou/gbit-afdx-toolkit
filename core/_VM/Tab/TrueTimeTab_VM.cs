@@ -49,14 +49,14 @@ namespace core._VM
 
         #region 不同模型生成时调用的函数对象
 
-        private string OneStepModel()
+        private bool OneStepModel()
         {
-            return "成功生成tt单跳模型";
+            return true;
         }
 
-        private string MultiStepModel()
+        private bool MultiStepModel()
         {
-            return "成功生成tt多条模型";
+            return true;
         }
 
         #endregion

@@ -35,22 +35,19 @@ namespace core._VM
 
         #region 不同模型生成时调用的函数对象
 
-        private string OneStepModel()
+        private bool OneStepModel()
         {
             Tools.Log("成功生成up单跳模型");
-            return "成功生成up单跳模型";
+            return true;
         }
 
-        private string MultiStepModel()
+        private bool MultiStepModel()
         {
             LinkedList<Tuple<string, string>> rules = new LinkedList<Tuple<string, string>>();
-            rules.AddLast(new Tuple<string, string>("【aa】", "b"));
-            rules.AddLast(new Tuple<string, string>("【bb】", "c"));
-            _M.ModelType modelType = _M.ModelType.UPPAAL;
-            string specName = "TestFolder", sourcePath, destPath;
-            Tools.GetSoruceAndDest(modelType, specName, out sourcePath, out destPath);
-            Tools.ReplaceOnCopyDir(sourcePath, destPath, rules);
-            return $"成功生成{modelType}的{specName}模型";
+            rules.AddLast(new Tuple<string, string>("【aa】", "45"));
+            rules.AddLast(new Tuple<string, string>("【bb】", "7"));
+            Tools.GenerateModel(_M.ModelType.UPPAAL, "TestFolder", rules);
+            return true;
         }
 
         #endregion
