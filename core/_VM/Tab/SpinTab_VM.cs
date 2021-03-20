@@ -11,31 +11,9 @@ namespace core._VM
         public List<CommonTab_VM> CommonTab_VMs => commonTab_VMs;
 
         public SpinTab_VM()
-            : base("SPIN")
+            : base(_M.ModelType.SPIN.ToString())
         {
-            this.commonTab_VMs = new List<CommonTab_VM>();
-            // 单跳模型
-            List<CommonItem_VM> commonItem_VMs = new List<CommonItem_VM>();
-            commonItem_VMs.Add(new CheckItem_VM("【key】", "测试3", true));
-            this.commonTab_VMs.Add(new CommonTab_VM("单跳模型", commonItem_VMs, OneStepModel));
-            // 多跳模型
-            commonItem_VMs = new List<CommonItem_VM>();
-            commonItem_VMs.Add(new TextItem_VM("【key】", "测试2", "2"));
-            this.commonTab_VMs.Add(new CommonTab_VM("多跳模型", commonItem_VMs, MultiStepModel));
+            this.commonTab_VMs = Tools.BuildCommonTabVMList(_M.ModelType.SPIN);
         }
-
-        #region 不同模型生成时调用的函数对象
-
-        private bool OneStepModel()
-        {
-            return true;
-        }
-
-        private bool MultiStepModel()
-        {
-            return true;
-        }
-
-        #endregion
     }
 }

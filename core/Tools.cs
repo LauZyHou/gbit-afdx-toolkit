@@ -17,23 +17,13 @@ namespace core
         /// <returns>构建好的CommonTab_VM的列表</returns>
         public static List<CommonTab_VM> BuildCommonTabVMList(ModelType modelType)
         {
-            // 要搜索.gafdx.metainf文件的目录
-            string templatePath;
-            switch (modelType)
+            string templatePath = modelType switch
             {
-                case ModelType.UPPAAL:
-                    templatePath = ResourceManager.UppaalTemplatePath;
-                    break;
-                case ModelType.SPIN:
-                    templatePath = ResourceManager.SpinTemplatePath;
-                    break;
-                case ModelType.TrueTime:
-                    templatePath = ResourceManager.TrueTimeTemplatePath;
-                    break;
-                default:
-                    templatePath = "";
-                    break;
-            }
+                ModelType.UPPAAL => ResourceManager.UppaalTemplatePath,
+                ModelType.SPIN => ResourceManager.SpinTemplatePath,
+                ModelType.TrueTime => ResourceManager.TrueTimeTemplatePath,
+                _ => "",
+            };
             // 待返回的结果列表
             List<CommonTab_VM> res = new List<CommonTab_VM>();
             // 获取待搜索目录下的所有.gafdx.metainf文件
@@ -71,7 +61,27 @@ namespace core
                 // 构造点击生成按钮时调用的委托 fixme
                 Func<bool> genFunc = delegate ()
                 {
-                    FlushTip($"fixme生成方法{file}");
+                    // 对所有的项生成规则列表
+                    LinkedList<Tuple<string, string>> rules = new LinkedList<Tuple<string, string>>();
+                    foreach (CommonItem_VM commonItem_VM in commonItem_VMs)
+                    {
+                        if (commonItem_VM is TextItem_VM)
+                        {
+                            TextItem_VM textItem_VM = commonItem_VM as TextItem_VM;
+                            string key = textItem_VM.TextItem.Key;
+                            string val = textItem_VM.TextItem.Val;
+                            rules.AddLast(new Tuple<string, string>(key, val));
+                        }
+                        else if (commonItem_VM is CheckItem_VM)
+                        {
+                            CheckItem_VM checkItem_VM = commonItem_VM as CheckItem_VM;
+                            string key = checkItem_VM.CheckItem.Key;
+                            string val = checkItem_VM.CheckItem.Val ? "1" : "0";
+                            rules.AddLast(new Tuple<string, string>(key, val));
+                        }
+                    }
+                    // 根据工具模型类型，特定模型名，规则列表来生成模型
+                    GenerateModel(modelType, smallName, rules);
                     return true;
                 };
                 // 构造当前的Tab页VM，传入从文件名解析出的模型名，从文件内容解析出的项列表
