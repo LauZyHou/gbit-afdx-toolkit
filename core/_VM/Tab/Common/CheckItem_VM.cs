@@ -14,9 +14,9 @@ namespace core._VM
 
         public CheckItem CheckItem => checkItem;
 
-        public CheckItem_VM(string _label, bool @checked)
+        public CheckItem_VM(string _key, string _label, bool _val)
         {
-            this.checkItem = new CheckItem(_label, @checked);
+            this.checkItem = new CheckItem(_key, _label, _val);
         }
     }
 }

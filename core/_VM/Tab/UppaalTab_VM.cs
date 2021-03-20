@@ -17,19 +17,11 @@ namespace core._VM
             this.commonTab_VMs = new List<CommonTab_VM>();
             // 单跳模型
             List<CommonItem_VM> commonItem_VMs = new List<CommonItem_VM>();
-            commonItem_VMs.Add(new TextItem_VM("测试1", "1"));
-            commonItem_VMs.Add(new CheckItem_VM("测试3", true));
-            commonItem_VMs.Add(new CheckItem_VM("测试4", false));
-            commonItem_VMs.Add(new TextItem_VM("测试1", "1"));
-            commonItem_VMs.Add(new TextItem_VM("测试1", "1"));
+            commonItem_VMs.Add(new TextItem_VM("【key】", "测试1", "1"));
             this.commonTab_VMs.Add(new CommonTab_VM("单跳模型", commonItem_VMs, OneStepModel));
             // 多跳模型
             commonItem_VMs = new List<CommonItem_VM>();
-            commonItem_VMs.Add(new TextItem_VM("测试2", "2"));
-            commonItem_VMs.Add(new TextItem_VM("测试2", "2"));
-            commonItem_VMs.Add(new TextItem_VM("测试2", "2"));
-            commonItem_VMs.Add(new CheckItem_VM("测试3", true));
-            commonItem_VMs.Add(new CheckItem_VM("测试4", false));
+            commonItem_VMs.Add(new CheckItem_VM("【key】", "测试4", false));
             this.commonTab_VMs.Add(new CommonTab_VM("多跳模型", commonItem_VMs, MultiStepModel));
         }
 

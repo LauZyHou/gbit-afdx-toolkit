@@ -14,9 +14,9 @@ namespace core._VM
 
         public TextItem TextItem => textItem;
 
-        public TextItem_VM(string _label, string _text)
+        public TextItem_VM(string _key, string _label, string _val)
         {
-            this.textItem = new TextItem(_label, _text);
+            this.textItem = new TextItem(_key, _label, _val);
         }
     }
 }

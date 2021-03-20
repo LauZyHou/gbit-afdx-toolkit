@@ -1,16 +1,90 @@
 ﻿using core._M;
+using core._VM;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace core
 {
     public class Tools
     {
         /// <summary>
+        /// 构建适用于某个工具模型的所有CommonTab_VM
+        /// </summary>
+        /// <param name="modelType">工具模型类型</param>
+        /// <returns>构建好的CommonTab_VM的列表</returns>
+        public static List<CommonTab_VM> BuildCommonTabVMList(ModelType modelType)
+        {
+            // 要搜索.gafdx.metainf文件的目录
+            string templatePath;
+            switch (modelType)
+            {
+                case ModelType.UPPAAL:
+                    templatePath = ResourceManager.UppaalTemplatePath;
+                    break;
+                case ModelType.SPIN:
+                    templatePath = ResourceManager.SpinTemplatePath;
+                    break;
+                case ModelType.TrueTime:
+                    templatePath = ResourceManager.TrueTimeTemplatePath;
+                    break;
+                default:
+                    templatePath = "";
+                    break;
+            }
+            // 待返回的结果列表
+            List<CommonTab_VM> res = new List<CommonTab_VM>();
+            // 获取待搜索目录下的所有.gafdx.metainf文件
+            string[] metaInfFiles = Directory.GetFiles(templatePath, "*.gafdx.metainf", SearchOption.TopDirectoryOnly);
+            // 遍历每个.gafdx.metainf文件，生成一个CommonTab_VM并写入
+            foreach (string file in metaInfFiles)
+            {
+                // 截取文件名的非后缀部分
+                string smallName = GetSmallName(file);
+                // 当前Tab页的所有选项列表
+                List<CommonItem_VM> commonItem_VMs = new List<CommonItem_VM>();
+                // 读取文件的每一行，以构造出每一项
+                string[] lines = File.ReadAllLines(file);
+                foreach (string line in lines)
+                {
+                    // 如果是空行直接跳过
+                    if (line.Length == 0) continue;
+                    // 如果不是空行就按空白符切分成三个部分
+                    string[] records = Regex.Split(line, "\\s+", RegexOptions.Singleline);
+                    // 一定是三元组<key, bool/string, label>
+                    if (records.Length != 3) continue;
+                    // 取出来
+                    string key = records[0], itemType = records[1], label = records[2];
+                    // 添加到选项列表里
+                    if (itemType == "string")
+                        commonItem_VMs.Add(new TextItem_VM(key, label, ""));
+                    else if (itemType == "bool")
+                        commonItem_VMs.Add(new CheckItem_VM(key, label, false));
+                    else
+                    {
+                        FlushTip($"解析{file}时出错，无法识别的项类型{itemType}");
+                        return res;
+                    }
+                }
+                // 构造点击生成按钮时调用的委托 fixme
+                Func<bool> genFunc = delegate ()
+                {
+                    FlushTip($"fixme生成方法{file}");
+                    return true;
+                };
+                // 构造当前的Tab页VM，传入从文件名解析出的模型名，从文件内容解析出的项列表
+                CommonTab_VM commonTab_VM = new CommonTab_VM(smallName, commonItem_VMs, genFunc);
+                // 加入到当前Tab页里
+                res.Add(commonTab_VM);
+            }
+            return res;
+        }
+
+        /// <summary>
         /// 目录拷贝时替换文件内容
-        /// 先遍历sourceDir下的所有文件，对于每个文件内容字符串，遍历rules做替换，然后写入destDir下的相应位置
+        /// 先拷贝sourceDir下的所有文件到destDir下，然后遍历rules做替换
         /// </summary>
         /// <param name="sourceDir">源目录</param>
         /// <param name="destDir">目标目录</param>
@@ -170,6 +244,24 @@ namespace core
             }
             // 异步写回文件
             await File.WriteAllTextAsync(filePath, text);
+        }
+
+
+        /// <summary>
+        /// 截取文件名的非后缀部分
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        private static string GetSmallName(string s)
+        {
+            // 先按".gafdx"划分，然后取最前面
+            string res = s.Split(".gafdx")[0];
+            // 再从后往前扫到第一个有'/'或者'\'的位置，取最后面
+            string[] tmp = res.Split('/');
+            res = tmp[tmp.Length - 1];
+            tmp = res.Split('\\');
+            res = tmp[tmp.Length - 1];
+            return res;
         }
 
         #endregion
