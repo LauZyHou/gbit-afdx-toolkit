@@ -256,7 +256,6 @@ namespace core
             await File.WriteAllTextAsync(filePath, text);
         }
 
-
         /// <summary>
         /// 截取文件名的非后缀部分
         /// </summary>
