@@ -3,7 +3,7 @@
         xmlns:vm="clr-namespace:core._VM;assembly=core"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Height="500" Width="700"
+        Height="500" Width="700" Icon="avares://core/Assets/logo.ico"
         x:Class="core._V.MainWindow_V" WindowStartupLocation="CenterScreen"
         Title="千兆AFDX套件-模型配置和生成工具">
 
