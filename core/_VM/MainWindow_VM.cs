@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace core._VM
@@ -9,7 +11,7 @@ namespace core._VM
     public class MainWindow_VM : ViewModelBase
     {
         private readonly ObservableCollection<Tab_VM> tabVMs = new ObservableCollection<Tab_VM>();
-        private string tip = "在此处获取操作提示";
+        private string tip = "GAFDX已根据*.gafdx.metainf构建配置项";
 
         public MainWindow_VM()
         {
@@ -30,5 +32,38 @@ namespace core._VM
         /// 主窗体下方的提示栏内容
         /// </summary>
         public string Tip { get => tip; set => this.RaiseAndSetIfChanged(ref tip, value); }
+
+        /// <summary>
+        /// 点击右下角的问号图标，打开Wiki页面
+        /// </summary>
+        private static void OnAskUse()
+        {
+            string url = "https://github.com/LauZyHou/gbit-afdx-toolkit/wiki/GAFDX";
+            try
+            {
+                Process.Start(url);
+            }
+            catch
+            {
+                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
     }
 }

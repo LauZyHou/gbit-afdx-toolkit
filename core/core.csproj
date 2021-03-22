@@ -7,6 +7,7 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\ask.png" />
     <None Remove="Assets\logo.ico" />
   </ItemGroup>
   <ItemGroup>
