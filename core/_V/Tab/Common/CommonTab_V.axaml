@@ -14,6 +14,16 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
     </ScrollViewer>
-    <Button Grid.Row="2" HorizontalContentAlignment="Center" Background="White" Command="{Binding GenModel}">生成模型</Button>
+    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+      <Button HorizontalContentAlignment="Center" Background="White" Command="{Binding GenModel}">生成模型</Button>
+      <TextBlock Text="       "/>
+      <Button Command="{Binding OnOpenSetting}">
+        <Image Source="avares://core/Assets/open.png" Width="30" Height="30"/>
+      </Button>
+      <TextBlock Text="       "/>
+      <Button Command="{Binding OnSaveSetting}">
+        <Image Source="avares://core/Assets/save.png" Width="30" Height="30"/>
+      </Button>
+    </StackPanel>
   </Grid>
 </UserControl>
