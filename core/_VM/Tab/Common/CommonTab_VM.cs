@@ -52,7 +52,7 @@ namespace core._VM
             string openFileName = await GetOpenFileName();
             if (string.IsNullOrEmpty(openFileName))
             {
-                Tools.FlushTip("取消打开项目文件");
+                Tools.FlushTip("取消打开配置文件");
                 return;
             }
             // 检查文件存在性
@@ -83,7 +83,7 @@ namespace core._VM
                     if (keyValuePairs.ContainsKey(key))
                     {
 
-                        checkItem_VM.CheckItem.Val = (keyValuePairs[key] == "true");
+                        checkItem_VM.CheckItem.Val = (keyValuePairs[key] == "True");
                     }
                 }
                 else if (commonItem_VM is TextItem_VM)
@@ -104,7 +104,31 @@ namespace core._VM
         /// </summary>
         private async void OnSaveSetting()
         {
-            Tools.FlushTip("save");
+            // 调用保存文件的窗体，获取要保存到的配置文件
+            string saveFileName = await GetSaveFileName();
+            if (string.IsNullOrEmpty(saveFileName))
+            {
+                Tools.FlushTip("取消保存配置文件");
+                return;
+            }
+            // 遍历，并写入文件
+            TextWriter textWriter = new StreamWriter(saveFileName);
+            foreach (CommonItem_VM commonItem_VM in commonItem_VMs)
+            {
+                if (commonItem_VM is CheckItem_VM)
+                {
+                    CheckItem_VM checkItem_VM = commonItem_VM as CheckItem_VM;
+                    textWriter.WriteLine($"{checkItem_VM.CheckItem.Key} {checkItem_VM.CheckItem.Val}");
+                }
+                else if (commonItem_VM is TextItem_VM)
+                {
+                    TextItem_VM textItem_VM = commonItem_VM as TextItem_VM;
+                    textWriter.WriteLine($"{textItem_VM.TextItem.Key} {textItem_VM.TextItem.Val}");
+                }
+            }
+            textWriter.Flush();
+            textWriter.Close();
+            Tools.FlushTip($"保存至配置文件{saveFileName}");
         }
 
         #region 私有
