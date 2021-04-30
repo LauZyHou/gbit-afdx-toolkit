@@ -9,7 +9,7 @@
       <ItemsControl Items="{Binding CommonItem_VMs}">
         <ItemsControl.ItemTemplate>
           <DataTemplate>
-            <ContentControl Content="{Binding .}" Height="30"/>
+            <ContentControl Content="{Binding .}" Height="40"/>
           </DataTemplate>
         </ItemsControl.ItemTemplate>
       </ItemsControl>
