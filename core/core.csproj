@@ -8,6 +8,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\ask.png" />
+    <None Remove="Assets\Fonts\STZHONGS2.ttf" />
     <None Remove="Assets\logo.ico" />
   </ItemGroup>
   <ItemGroup>
